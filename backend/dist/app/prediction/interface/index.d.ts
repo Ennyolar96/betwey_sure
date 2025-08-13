@@ -1,0 +1,49 @@
+import { findMany } from '../../../global/common';
+import { Types } from 'mongoose';
+export interface IPrediction {
+    _id?: Types.ObjectId;
+    id: number;
+    date: Date;
+    status: string;
+    home_goals: number;
+    away_goals: number;
+    homeID: number;
+    homeTeam: string;
+    homeLogo: string;
+    awayID: number;
+    awayTeam: string;
+    awayLogo: string;
+    country: string;
+    countryCode: string;
+    competition: string;
+    competition_full: string;
+    home_win: string;
+    away_win: string;
+    '1x2': string;
+    draw: string;
+    both_teams: string;
+    both_teams_to_score: string;
+    over15goals: string;
+    over25goals: string;
+    over35goals: string;
+    correctscore: string;
+    homeform: string;
+    awayform: string;
+    home_win_odds: string;
+    away_win_odds: string;
+    draw_odds: string;
+    '1x_odds': string;
+    '12_odds': string;
+    '2x_odds': string;
+    bttshomeform?: string;
+    bttsawayform?: string;
+    btts_yes_odds?: string;
+    btts_no_odds?: string;
+    createAt?: Date;
+    updatedAt?: Date;
+}
+export interface response extends Omit<IPrediction, '_id' | 'createdAt' | 'updatedAt'> {
+}
+export interface filterPrediction extends findMany {
+    date: Date;
+}

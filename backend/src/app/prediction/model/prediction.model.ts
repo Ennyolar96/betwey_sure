@@ -1,7 +1,7 @@
 import { COLLECTIONS } from '@app/common';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import * as paginate from 'mongoose-paginate-v2';
+import mongoosePaginate from 'mongoose-paginate-v2';
 import { IPrediction } from '../interface';
 
 @Schema({ collection: COLLECTIONS.predict, timestamps: true })
@@ -120,4 +120,4 @@ export class PredictionModel implements IPrediction {
 
 export type PredictionDocument = PredictionModel & Document;
 export const PredictionSchema = SchemaFactory.createForClass(PredictionModel);
-PredictionSchema.plugin(paginate);
+PredictionSchema.plugin(mongoosePaginate);

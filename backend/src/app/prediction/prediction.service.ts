@@ -4,11 +4,9 @@ import { HttpClientService } from '@app/service';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
-import * as dayjs from 'dayjs';
 import { FilterQuery, PaginateModel, Types } from 'mongoose';
-import { filterPrediction, IPrediction, response } from './interface';
+import { filterPrediction, IPrediction } from './interface';
 import { PredictionDocument } from './model';
-import { retry } from 'rxjs';
 
 @Injectable()
 export class PredictionService {
@@ -44,9 +42,6 @@ export class PredictionService {
    */
   public async fetchPrediction(query: filterPrediction) {
     const date = query.date.toISOString().split('T')[0];
-    if (!dayjs(date, 'YYYY-MM-DD', true).isValid()) {
-      throw new BadRequestException('Invalid date format. Use YYYY-MM-DD.');
-    }
 
     // First try to get cached results from database
     const dbResponse = await findManyWrapper<PredictionDocument>(
